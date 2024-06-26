@@ -4,8 +4,8 @@ import CartContext from "../../context/CartContext";
 function AddToCart({ product }) {
     // inc
     // dec
-
     const {cart, increaseQuantity, decreaseQuantity} = useContext(CartContext)
+    console.log("Add to cart");
     function increase() {
         increaseQuantity(product);
     }
