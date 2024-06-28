@@ -5,74 +5,83 @@ import { useState, useEffect } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import Categories from "../Categories/Categories";
 function Products() {
-    // const products = [
-    //       {
-    //         id: 1,
-    //         title: "Apple iPhone 14",
-    //         price: "Rs. 1,00,000"
-    //       },
-    //       {
-    //         id: 2,
-    //         title: "Apple iPhone 13",
-    //         price: "Rs. 70,000"
-    //       },
-    //       {
-    //         id: 3,
-    //         title: "Google Pixel 7",
-    //         price: "Rs. 50,000"
-    //       },
-    //       {
-    //         id: 4,
-    //         title: "Nokia 1100",
-    //         price: "Rs. 2,000"
-    //       },
-    //       {
-    //         id: 5,
-    //         title: "Samsung Galaxy S10",
-    //         price: "Rs. 1,00,000"
-    //       },
-    //       {
-    //         id: 6,
-    //         title: "Sony Xperia S10",
-    //         price: "Rs. 1,00,000"
-    //       }
-    // ];
+  // const products = [
+  //       {
+  //         id: 1,
+  //         title: "Apple iPhone 14",
+  //         price: "Rs. 1,00,000"
+  //       },
+  //       {
+  //         id: 2,
+  //         title: "Apple iPhone 13",
+  //         price: "Rs. 70,000"
+  //       },
+  //       {
+  //         id: 3,
+  //         title: "Google Pixel 7",
+  //         price: "Rs. 50,000"
+  //       },
+  //       {
+  //         id: 4,
+  //         title: "Nokia 1100",
+  //         price: "Rs. 2,000"
+  //       },
+  //       {
+  //         id: 5,
+  //         title: "Samsung Galaxy S10",
+  //         price: "Rs. 1,00,000"
+  //       },
+  //       {
+  //         id: 6,
+  //         title: "Sony Xperia S10",
+  //         price: "Rs. 1,00,000"
+  //       }
+  // ];
   // let products = [];
 
   let [products, setProducts] = useState([]);
-  console.log("products")
+  let [cate, setCate] = useState(0);
+  console.log("products");
   console.log(useWindowSize());
   useEffect(() => {
-    fetch("https://run.mocky.io/v3/1c9a787b-3e6b-4fc2-9460-f908e2e3cc29").then(
-      (response) => {
+    fetch("https://run.mocky.io/v3/1c9a787b-3e6b-4fc2-9460-f908e2e3cc29")
+      .then((response) => {
         return response.json();
-      }
-    ).then((res) => {
-      console.log(res);
-      setProducts(res);
-    })
-  }, [])
+      })
+      .then((res) => {
+        console.log(res);
+        setProducts(res);
+      });
+  }, []);
 
-  
-    return (
+  return (
+    <div>
       <div>
-        <div><Effect /></div>
-        <Categories/>
-            {
-                products.map(function (item, index) {
-                  return (<ProductCard key={index}  product={item} />)
-                })
-            }
-        </div>
-    )
+        <h3>Filter</h3>
+        <button onClick={() => setCate(1)}>Phones</button>
+        <button onClick={() => setCate(2)}>Laptop</button>
+        <button onClick={() => setCate(3)}>Clothes</button>
+        <button onClick={() => setCate(0)}>All</button>
+      </div>
+      <Categories />
+      {products
+        .filter((product) => {
+          if (cate === 0) return true;
+          return product.category === cate;
+        })
+        .map(function (item, index) {
+          return <ProductCard key={index} product={item} />;
+        })}
+    </div>
+  );
 }
 export let a = 10;
 export let b = 20;
 export default React.memo(Products);
-// Javascript XML 
+// Javascript XML
 
 //ProductCard(title)
-//named export 
+//named export
 //default export
 // One default export
 // multiple named exports
@@ -91,7 +100,6 @@ export default React.memo(Products);
 //     </div>
 //   )
 // }
-
 
 // VDOM -> JSON reprentation of DOM
 // let currentVdom = {
@@ -223,7 +231,6 @@ export default React.memo(Products);
 // title 2 has changed to 4
 // title 3 has changed to 2
 // product card with title 3 has to be added
-
 
 // oldDom = [
 //   <ProductCard key={i1} title="Title 1" />,
