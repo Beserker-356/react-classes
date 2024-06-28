@@ -1,8 +1,9 @@
 import ProductCard from "../ProductCard/ProductCard";
 import Effect from "../Effect/Effect";
+import React from "react";
 import { useState, useEffect } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
-import { memo } from "react";
+import Categories from "../Categories/Categories";
 function Products() {
     // const products = [
     //       {
@@ -42,7 +43,7 @@ function Products() {
   console.log("products")
   console.log(useWindowSize());
   useEffect(() => {
-    fetch("https://602fc537a1e9d20017af105e.mockapi.io/api/v1/products").then(
+    fetch("https://run.mocky.io/v3/1c9a787b-3e6b-4fc2-9460-f908e2e3cc29").then(
       (response) => {
         return response.json();
       }
@@ -55,10 +56,11 @@ function Products() {
   
     return (
       <div>
-          <div><Effect /></div>
+        <div><Effect /></div>
+        <Categories/>
             {
                 products.map(function (item, index) {
-                  return (<ProductCard key={index}  product={item}/>)
+                  return (<ProductCard key={index}  product={item} />)
                 })
             }
         </div>
@@ -66,7 +68,7 @@ function Products() {
 }
 export let a = 10;
 export let b = 20;
-export default memo(Products);
+export default React.memo(Products);
 // Javascript XML 
 
 //ProductCard(title)
